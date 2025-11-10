@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Recommended Movies - Demo</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    body { background:#f6f7f9; }
+
+    .movies-wrap {
+      background: #fff;
+      padding: 18px;
+      border-radius: 10px;
+      position: relative;
+      overflow: visible;
+    }
+
+    .movies-header {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:12px;
+    }
+
+    /* horizontal scroll area */
+    .scroll-area {
+      display:flex;
+      gap: 16px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      padding: 8px 6px;
+      align-items:stretch;
+    }
+
+    /* hide scrollbar */
+    .scroll-area::-webkit-scrollbar { height: 10px; display: none; }
+    .scroll-area { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* Card sizing: make cards occupy a fraction depending on breakpoints */
+    .movie-card {
+      flex: 0 0 calc(25% - 12px); /* default 4 cards per view */
+      max-width: calc(25% - 12px);
+      border: none;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 6px 18px rgba(20,20,30,0.06);
+    }
+
+    /* Responsive breakpoints for card width */
+    @media (max-width: 992px) { /* md/lg break */
+      .movie-card { flex: 0 0 calc(33.333% - 10px); max-width: calc(33.333% - 10px); } /* 3 per view */
+    }
+    @media (max-width: 768px) {
+      .movie-card { flex: 0 0 calc(50% - 10px); max-width: calc(50% - 10px); } /* 2 per view */
+    }
+    @media (max-width: 420px) {
+      .movie-card { flex: 0 0 calc(100% - 10px); max-width: calc(100% - 10px); } /* 1 per view */
+    }
+
+    .movie-card img {
+      width:100%;
+      height: 300px;
+      object-fit: cover;
+      display:block;
+    }
+
+    .movie-card .card-body {
+      padding: 10px 12px;
+    }
+
+    .movie-title { font-size: 0.95rem; margin-bottom:4px; font-weight:600; }
+    .movie-meta { font-size: 0.82rem; color:#6c757d; }
+
+    /* overlay arrows */
+    .scroll-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      width:44px;
+      height:44px;
+      border-radius:50%;
+      border: none;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background: rgba(0,0,0,0.55);
+      color: #fff;
+      box-shadow: 0 6px 16px rgba(10,10,20,0.2);
+      cursor: pointer;
+    }
+    .scroll-left { left: 8px; }
+    .scroll-right { right: 8px; }
+    .scroll-btn:active { transform: translateY(-50%) scale(0.96); }
+
+    /* See all grid */
+    #allGrid { display:none; margin-top:18px; }
+    .grid-card img { height: 300px; object-fit: cover; width:100%; border-radius:6px; }
+
+    /* small UI niceties */
+    .see-all-link { color:#d63384; font-weight:600; text-decoration:none; }
+    .see-all-link:hover { text-decoration:underline; color:#b02a6b; }
+  </style>
+</head>
+<body>
+
+<div class="container my-5">
+
+  <div class="movies-wrap">
+    <div class="movies-header">
+      <h5 class="mb-0">Recommended Movies</h5>
+      <a href="#" id="seeAll" class="see-all-link">See All ›</a>
+    </div>
+
+    <!-- left arrow -->
+    <button class="scroll-btn scroll-left" id="btnLeft" aria-label="scroll left">
+      <i class="bi bi-chevron-left"></i>
+    </button>
+
+    <!-- horizontal scroll area -->
+    <div class="scroll-area" id="scrollArea" role="region" aria-label="Recommended movies">
+      <!-- Repeat movie cards - replace src/titles as needed -->
+      <div class="card movie-card">
+        <img src="https://i.ibb.co/2tP1sZV/1.jpg" alt="Laalo">
+        <div class="card-body">
+          <div class="movie-title">Laalo - Krishna Sada Sahaayate</div>
+          <div class="movie-meta">Drama · 9.6/10 · 3.9K votes</div>
+        </div>
+      </div>
+
+      <div class="card movie-card">
+        <img src="https://i.ibb.co/0JjWnV7/2.jpg" alt="Chaniya Toli">
+        <div class="card-body">
+          <div class="movie-title">Chaniya Toli</div>
+          <div class="movie-meta">Action / Comedy / Crime</div>
+        </div>
+      </div>
+
+      <div class="card movie-card">
+        <img src="https://i.ibb.co/1qdZSVx/3.jpg" alt="Taj Story">
+        <div class="card-body">
+          <div class="movie-title">The Taj Story</div>
+          <div class="movie-meta">Drama</div>
+        </div>
+      </div>
+
+      <div class="card movie-card">
+        <img src="https://i.ibb.co/gVqMFCL/4.jpg" alt="Thamma">
+        <div class="card-body">
+          <div class="movie-title">Thamma</div>
+          <div class="movie-meta">Horror / Romantic</div>
+        </div>
+      </div>
+
+      <div class="card movie-card">
+        <img src="https://i.ibb.co/hLrjX38/5.jpg" alt="Ek Deewane Ki Deewaniyat">
+        <div class="card-body">
+          <div class="movie-title">Ek Deewane Ki Deewaniyat</div>
+          <div class="movie-meta">Romantic / Thriller</div>
+        </div>
+      </div>
+
+      <!-- Add more cards to test scrolling -->
+      <div class="card movie-card">
+        <img src="https://i.ibb.co/2tP1sZV/1.jpg" alt="Laalo 2">
+        <div class="card-body">
+          <div class="movie-title">Laalo - Extended</div>
+          <div class="movie-meta">Drama</div>
+        </div>
+      </div>
+
+      <div class="card movie-card">
+        <img src="https://i.ibb.co/0JjWnV7/2.jpg" alt="Chaniya 2">
+        <div class="card-body">
+          <div class="movie-title">Chaniya Toli 2</div>
+          <div class="movie-meta">Comedy</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- right arrow -->
+    <button class="scroll-btn scroll-right" id="btnRight" aria-label="scroll right">
+      <i class="bi bi-chevron-right"></i>
+    </button>
+  </div>
+
+  <!-- Full grid shown after See All -->
+  <div id="allGrid" class="mt-3">
+    <div class="d-flex justify-content-between align-items-center mb-2">
+      <h5 class="mb-0">All Recommended Movies</h5>
+      <a href="#" id="backToCarousel" class="see-all-link">‹ Back</a>
+    </div>
+
+    <div class="row g-3">
+      <!-- repeat grid cards - four per row on lg -->
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+        <div class="card grid-card">
+          <img src="https://i.ibb.co/2tP1sZV/1.jpg" alt="">
+          <div class="card-body">
+            <div class="movie-title">Laalo - Krishna Sada Sahaayate</div>
+            <div class="movie-meta">Drama</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+        <div class="card grid-card">
+          <img src="https://i.ibb.co/0JjWnV7/2.jpg" alt="">
+          <div class="card-body">
+            <div class="movie-title">Chaniya Toli</div>
+            <div class="movie-meta">Action / Comedy / Crime</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+        <div class="card grid-card">
+          <img src="https://i.ibb.co/1qdZSVx/3.jpg" alt="">
+          <div class="card-body">
+            <div class="movie-title">The Taj Story</div>
+            <div class="movie-meta">Drama</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+        <div class="card grid-card">
+          <img src="https://i.ibb.co/gVqMFCL/4.jpg" alt="">
+          <div class="card-body">
+            <div class="movie-title">Thamma</div>
+            <div class="movie-meta">Horror / Romantic</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+        <div class="card grid-card">
+          <img src="https://i.ibb.co/gVqMFCL/4.jpg" alt="">
+          <div class="card-body">
+            <div class="movie-title">Thamma</div>
+            <div class="movie-meta">Horror / Romantic</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+        <div class="card grid-card">
+          <img src="https://i.ibb.co/gVqMFCL/4.jpg" alt="">
+          <div class="card-body">
+            <div class="movie-title">Thamma</div>
+            <div class="movie-meta">Horror / Romantic</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+        <div class="card grid-card">
+          <img src="https://i.ibb.co/gVqMFCL/4.jpg" alt="">
+          <div class="card-body">
+            <div class="movie-title">Thamma</div>
+            <div class="movie-meta">Horror / Romantic</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+        <div class="card grid-card">
+          <img src="https://i.ibb.co/gVqMFCL/4.jpg" alt="">
+          <div class="card-body">
+            <div class="movie-title">Thamma</div>
+            <div class="movie-meta">Horror / Romantic</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- more items... -->
+    </div>
+  </div>
+
+</div>
+
+<script>
+  (function () {
+    const scrollArea = document.getElementById('scrollArea');
+    const btnLeft = document.getElementById('btnLeft');
+    const btnRight = document.getElementById('btnRight');
+    const seeAll = document.getElementById('seeAll');
+    const allGrid = document.getElementById('allGrid');
+    const moviesWrap = document.querySelector('.movies-wrap');
+    const backToCarousel = document.getElementById('backToCarousel');
+
+    // Scroll by the visible width (so it jumps one "page")
+    function scrollPage(direction) {
+      // compute visible width minus a small gap to avoid overscroll
+      const visible = scrollArea.clientWidth;
+      const gap = 16; // matches CSS gap
+      const amount = visible - gap;
+      scrollArea.scrollBy({ left: direction === 'left' ? -amount : amount, behavior: 'smooth' });
+    }
+
+    btnLeft.addEventListener('click', () => scrollPage('left'));
+    btnRight.addEventListener('click', () => scrollPage('right'));
+
+    // Optional: hide left arrow at leftmost and right arrow at rightmost
+    function updateArrows() {
+      // small epsilon for float issues
+      const maxScroll = scrollArea.scrollWidth - scrollArea.clientWidth - 1;
+      btnLeft.style.display = scrollArea.scrollLeft > 5 ? 'flex' : 'none';
+      btnRight.style.display = scrollArea.scrollLeft < maxScroll ? 'flex' : 'none';
+    }
+    // initialize arrow visibility
+    updateArrows();
+    // update as user scrolls
+    scrollArea.addEventListener('scroll', updateArrows);
+    // also update on resize
+    window.addEventListener('resize', updateArrows);
+
+    // See All toggle
+    seeAll.addEventListener('click', (e) => {
+      e.preventDefault();
+      moviesWrap.style.display = 'none';
+      allGrid.style.display = 'block';
+      // ensure scrollbar won't cause layout jump
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    backToCarousel.addEventListener('click', (e) => {
+      e.preventDefault();
+      moviesWrap.style.display = '';
+      allGrid.style.display = 'none';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      // refresh arrow visibility
+      updateArrows();
+    });
+
+    // If user resizes quickly, re-evaluate arrow show/hide
+    window.addEventListener('load', updateArrows);
+  })();
+</script>
+
+</body>
+</html>

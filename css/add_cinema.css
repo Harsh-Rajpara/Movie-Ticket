@@ -1,0 +1,261 @@
+body {
+  background-color: #f8f9fa;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 230px;
+  height: 100vh;
+  background-color:#ca635a;
+  color: #fff;
+  padding-top: 30px;
+}
+
+.sidebar h4 {
+  font-size: 18px;
+  text-align: center;
+  margin-bottom: 30px;
+  color: #ffc107;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  padding: 12px 25px;
+}
+
+.sidebar ul li a {
+  color: #dfdfdfb6;
+  text-decoration: none;
+  display: block;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.sidebar ul li:hover a,
+.sidebar ul li.active {
+  color: #fff;
+}
+
+/* Main */
+.main-content {
+  margin-left: 230px;
+}
+
+.btn-gradient {
+  background: linear-gradient(to right, #0b2347, #b0852d);
+  color: white;
+  border: none;
+}
+
+.btn-gradient:hover {
+  opacity: 0.9;
+}
+
+.navbar {
+  background: linear-gradient(to left, #3f4f7c, #ca635a);
+  color: white;
+}
+
+.navbar-brand {
+  font-weight: bold;
+  color: white !important;
+}
+
+/* .btn-cinema {
+  background-color: #0b2347;
+  color: #fff;
+  border: none;
+}
+
+.btn-cinema:hover {
+  background-color: #b0852d;
+} */
+
+.nav_add_btn{
+  width: 80px;
+  border: none;
+}
+
+.nav_add_btn:active,
+.nav_add_btn:focus{
+  box-shadow: none;
+}
+
+/* Table */
+.cinema-table {
+  margin-top: 30px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+thead{
+  background: linear-gradient(to left, #3f4f7c84, #ca635a7a);
+}
+
+th {
+  background-color: #f1f1f1;
+  text-transform: uppercase;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+}
+
+.poster-img {
+  width: 100px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.action-icons i {
+  font-size: 18px;
+  cursor: pointer;
+  margin: 0 6px;
+}
+
+.action-icons i.bi-pencil-square {
+  color: #0b2347;
+}
+
+.action-icons i.bi-trash {
+  color: #dc3545;
+}
+
+.action-icons i:hover {
+  opacity: 0.7;
+}
+
+/* Modal Custom */
+.modal-content {
+  border-radius: 10px;
+  padding: 20px 30px;
+}
+
+.modal-header {
+  border-bottom: none;
+}
+
+.modal-title {
+  font-weight: 700;
+  color: #c2a24b;
+  background: linear-gradient(to left, #191f30, #ca635a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.btn-custom {
+      background: linear-gradient(to right, #0a0a0a, #d1b253);
+      color: white;
+      border: none;
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .btn-custom:hover {
+      opacity: 0.9;
+    }
+
+    .form-select {
+      border-radius: 20px;
+      padding: 8px 10px;
+    }
+
+    .btn-close:focus,
+    .btn-close:active{
+      box-shadow: none;
+    }
+
+.form-control {
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.form-select:focus,
+.form-control:focus,
+.form-control:active{
+  box-shadow: none;
+  border-color: #c95a35;
+}
+
+.image-box {
+  border: 1px dashed #ccc;
+  border-radius: 8px;
+  height: 140px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: gray;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.image-box:hover {
+  border-color: #c95a35;
+}
+
+.btn-add {
+  background: linear-gradient(to left, #3f4f7c, #ca635a);
+  color: #fff;
+  border: none;
+  width: 100%;
+  border-radius: 20px;
+  padding: 10px;
+  font-weight: 500;
+}
+
+.error-text {
+  font-size: 13px;
+  color: red;
+  margin-top: 3px;     /* very small gap */
+  display: block;
+}
+
+
+/* Modal Styling */
+.modal-content {
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.poster-upload {
+  width: 130px;
+  height: 190px;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+
+.poster-upload:hover {
+  border-color: #b0852d;
+}
+
+.poster-upload img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* table */
+.table thead th {
+  font-weight: 600;
+}
+
+.table tbody td {
+  vertical-align: middle;
+}

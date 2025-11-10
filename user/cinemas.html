@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/css/user_home.css">
+
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container d-flex justify-content-between">
+            <a class="logo-name navbar-brand text-white fw-bold" href="#">Book Show</a>
+
+            <form class="d-flex  position-relative" style="width: 40%;">
+                <input class="form-control ps-5" type="search" placeholder="Search for Movies, Cinemas and others..." />
+                <i class="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"
+                    style="cursor: pointer;"></i>
+            </form>
+
+            <div class="d-flex align-items-center">
+                <span class="text-white me-2">Harsh Rajpara</span>
+                <a href="#"><i class="bi bi-person-circle me-3 fs-3 text-dark"></i></a>
+                <button class="btn btn-dark btn-md rounded-3">Sign Up</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Secondary Nav -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-1">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="navbar-nav">
+                <a class="nav-link" href="./user_home.html" id="homeNav">Home</a>
+                <a class="nav-link" href="./movies.html" id="moviesNav">Movies</a>
+                <a class="nav-link active" href="#" id="cinemasNav">Cinemas</a>
+                <a class="nav-link" href="#">Plays</a>
+                <a class="nav-link" href="#">Sports</a>
+                <a class="nav-link" href="#">Events</a>
+                <a class="nav-link" href="#">Contact Us</a>
+            </div>
+            <div>
+                <a href="#"><i class="bi bi-facebook text-light me-3"></i></a>
+                <a href="#"><i class="bi bi-instagram text-light me-3"></i></a>
+                <a href="#"><i class="bi bi-twitter-x text-light me-3"></i></i></a>
+                <a href="#"><i class="bi bi-youtube text-light me-3"></i></a>
+                <a href="#"><i class="bi bi-linkedin text-light"></i></a>
+            </div>
+        </div>
+    </nav>
+    
+     <!-- CINEMAS PAGE -->
+    <div id="cinemasPage" class="container my-4"">
+        <div class="row">
+            <div class="col-md-3">
+                <h5 class="fw-semibold mb-3">Cinema filter</h5>
+                <div class="filter-box"></div>
+            </div>
+
+            <div class="col-md-9">
+                <h5 class="fw-semibold mb-3">You might also like more.</h5>
+                <div class="d-flex gap-3 flex-wrap">
+                    <div class="card cinema-card" style="width: 200px;">
+                        <img src="https://i.ibb.co/SyqQJ1f/cinema1.jpg" class="card-img-top" alt="INOX Raj Imperial" />
+                        <div class="card-body text-center">
+                            <p class="mb-0 fw-semibold">INOX Raj Imperial</p>
+                        </div>
+                    </div>
+                    <div class="card cinema-card" style="width: 200px;">
+                        <img src="https://i.ibb.co/fqP12mM/cinema2.jpg" class="card-img-top" alt="Roongta" />
+                        <div class="card-body text-center">
+                            <p class="mb-0 fw-semibold">Roongta</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CINEMA DETAIL PAGE -->
+    <div id="cinemaDetailPage" class="container my-4" style="display:none;">
+        <div class="row align-items-start">
+            <div class="col-md-4">
+                <img src="https://i.ibb.co/SyqQJ1f/cinema1.jpg" class="img-fluid rounded shadow"
+                    alt="INOX Raj Imperial" />
+                <h5 class="mt-3 fw-semibold">INOX Raj Imperial</h5>
+            </div>
+            <div class="col-md-8">
+                <h3 class="fw-bold text-dark">INOX Raj <span class="text-warning">Imperial</span></h3>
+                <p class="text-muted mb-2">
+                    📍 New City Light Rd, Anand Park, Bharthana, Surat, Gujarat 395007
+                </p>
+                <p class="text-muted">
+                    🏨 Food Zone, Parking, Game Zone, Box Office, Green Room
+                </p>
+                <button class="btn btn-primary px-4 mt-2">Know More...</button>
+            </div>
+        </div>
+
+        <hr class="my-5" />
+
+        <h5 class="fw-bold mb-4">On screen movies at INOX Raj Imperial</h5>
+        <div class="row g-4">
+            <div class="col-md-3">
+                <div class="card movie-card">
+                    <img src="https://i.ibb.co/jGH1TPZ/kerala.jpg" class="card-img-top" alt="The Kerala Story" />
+                    <div class="card-body text-center">
+                        <p class="mb-0 fw-semibold">The Kerala Story</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
+</body>
+</html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="/css/add_cinema.css">
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h4>Ticket Factory</h4>
+        <ul>
+            <li class="active">Cinema</li>
+            <li><a href="add_movies.html">Movie</a></li>
+            <li><a href="add_seat.html">Seats</a></li>
+            <li><a href="other.html">Other</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm px-3">
+            <div class="container-fluid d-flex align-items-center justify-content-between">
+                <h4 class="fw-bold text-center mx-auto m-0">Cinemas</h4>
+                <div class="d-flex align-items-center">
+                    <button class="nav_add_btn rounded-3 btn btn-danger btn-sm me-3" data-bs-toggle="modal"
+                        data-bs-target="#addCinemaModal">
+                        Cinema +
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Table -->
+        <div class="cinema-table table-responsive px-3">
+            <table class="table table-bordered text-center align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th>CID</th>
+                        <th>CINEMA</th>
+                        <th>LOCATION</th>
+                        <th>FACILITIES</th>
+                        <th>POSTER</th>
+                        <th>ACTION</th>
+                    </tr>
+                </thead>
+
+                <tbody id="cinemaTableBody">
+                    <!-- <tr>
+                        <td>#586</td>
+                        <td>INOX Raj Imperial</td>
+                        <td>New City Light Rd, Anand Park, Bharthana, Surat, Gujarat 395007</td>
+                        <td>Hotel, Food Zone, Parking, Game Zone, Box Office, Green Room</td>
+                        <td><img src="https://images.unsplash.com/photo-1603190287605-e6ade32fa852?w=500"
+                                class="poster-img"></td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-dark"><i class="bi bi-pencil"></i></button>
+                            <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>#444</td>
+                        <td>Roongta</td>
+                        <td>New City Light Rd, Anand Park, Bharthana, Surat, Gujarat 395007</td>
+                        <td>Hotel, Food Zone, Parking, Game Zone, Box Office, Green Room</td>
+                        <td><img src="https://images.unsplash.com/photo-1626266063407-1c298f5d3a9c?w=500"
+                                class="poster-img"></td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-dark"><i class="bi bi-pencil"></i></button>
+                            <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                        </td>
+                    </tr> -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="addCinemaModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content shadow">
+                <div class="modal-header d-flex jutify-content-between align-items-center">
+                    <h5 class="modal-title text-center mx-auto ">Add Cinema</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                    <form>
+                        <div class="row g-3">
+                            <div class="col-md-8">
+                                <div class="mb-3">
+                                    <input id="cinemaName" type="text" class="form-control" placeholder="Cinema Name">
+                                    <span id="cinemaerr" class="error-text ps-1"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <input id="location" type="text" class="form-control" placeholder="Location">
+                                    <span id="locationerr" class="error-text ps-1"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <input id="facilities" type="text" class="form-control" placeholder="Facilities">
+                                    <span id="facilitieserr" class="error-text ps-1"></span>
+                                </div>
+                                <button type="button" class="btn btn-add" onclick="validation()">Add +</button>
+                            </div>
+
+                            <div class="col-md-4 text-center">
+                                <div class="image-box" id="imageBox">
+                                    Cinema Image +
+                                </div>
+                                <input type="file" id="imageInput" accept="image/*" style="display:none;">
+                                <span id="imageInputerr" class="error-text ps-1"></span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+
+
+        window.onload = function () {
+            loadCinemaTable();   // ✅ load data from localStorage
+        };
+
+        const imageBox = document.getElementById("imageBox");
+        const imageInput = document.getElementById("imageInput");
+
+        // When clicking the box, open file picker
+        imageBox.addEventListener("click", () => {
+            imageInput.click();
+        });
+
+        // When image selected, show preview
+        imageInput.addEventListener("change", (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    imageBox.innerHTML = `<img src="${e.target.result}" alt="Cinema Image" 
+          style="width:100%; height:100%; object-fit:cover; border-radius:8px;">`;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function validation() {
+            let cinemaName = document.getElementById("cinemaName").value;
+            let location = document.getElementById("location").value;
+            let facilities = document.getElementById("facilities").value;
+            let imageInput = document.getElementById("imageInput").value;
+
+            let isValid = true;
+
+            if (cinemaName === "") {
+                let cinemaerr = document.getElementById("cinemaerr");
+                cinemaerr.innerHTML = "This feild is required";
+                cinemaerr.style.color = "red";
+                isValid = false;
+            }
+
+            if (location === "") {
+                let locationerr = document.getElementById("locationerr");
+                locationerr.innerHTML = "This feild is required";
+                locationerr.style.color = "red";
+                isValid = false;
+            }
+
+            if (facilities === "") {
+                let facilitieserr = document.getElementById("facilitieserr");
+                facilitieserr.innerHTML = "This feild is required";
+                facilitieserr.style.color = "red";
+                isValid = false;
+            }
+
+            if (imageInput === "") {
+                let imageInput = document.getElementById("imageInput");
+                imageInput.innerHTML = "This feild is required";
+                imageInput.style.color = "red";
+                isValid = false;
+            }
+
+            if (!isValid) return;  // Stop if any error
+
+
+            if (isValid) {
+
+                let cinemaName = document.getElementById("cinemaName").value;
+                let location = document.getElementById("location").value;
+                let facilities = document.getElementById("facilities").value;
+                let imageInput = document.getElementById("imageInput").value;
+
+                let cid = Math.floor(Math.random() * 1001);
+
+                // Get previous data (array)
+                let cinemaList = JSON.parse(localStorage.getItem("cinemaList")) || [];
+
+                let cinemaData = {
+                    cid: cid,
+                    name: cinemaName,
+                    location: location,
+                    facilities: facilities,
+                    // image: reader.result  // Base64 image
+                };
+                cinemaList.push(cinemaData);
+
+                // Save array back
+                localStorage.setItem("cinemaList", JSON.stringify(cinemaList));
+
+                alert("Added Successfully!");
+
+                loadCinemaTable();
+
+                cinemaName = document.getElementById("cinemaName").value = "";
+                location = document.getElementById("location").value = "";
+                facilities = document.getElementById("facilities").value = "";
+                imageInput = document.getElementById("imageInput").value = "";
+
+                // Close modal
+                let modal = bootstrap.Modal.getInstance(document.getElementById("addCinemaModal"));
+                modal.hide();
+            }
+
+        }
+
+
+        function loadCinemaTable() {
+            let cinemaList = JSON.parse(localStorage.getItem("cinemaList")) || [];
+            let tableBody = document.getElementById("cinemaTableBody");
+
+            tableBody.innerHTML = "";  // Clear old rows
+
+            cinemaList.forEach(cinema => {
+                let row = `
+            <tr>
+                <td>#${cinema.cid}</td>
+                <td>${cinema.name}</td>
+                <td>${cinema.location}</td>
+                <td>${cinema.facilities}</td>
+                <td>
+                    <img src="${cinema.image ? cinema.image : 'placeholder.jpg'}" class="poster-img">
+                </td>
+                <td>
+                    <button class="btn btn-sm btn-outline-dark"><i class="bi bi-pencil"></i></button>
+                    <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                </td>
+            </tr>
+        `;
+
+                tableBody.innerHTML += row;
+            });
+        }
+
+    </script>
+
+
+</body>
+
+</html>

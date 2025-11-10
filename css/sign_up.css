@@ -1,0 +1,78 @@
+body {
+  height: 100vh;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("/assets/background.png");
+  background-size: cover; /* Makes the image cover the whole screen */
+  background-repeat: no-repeat; /* Prevents repeating */
+  background-position: center; /* Centers the image */
+  margin: 0;
+}
+
+.container{
+  height: 100vh;
+}
+
+.signup-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 350px;
+  padding: 30px;
+  position: relative;
+}
+
+.signup-card h3 {
+  text-align: center;
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 25px;
+  background: linear-gradient(to left, #191f30, #ca635a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.form-control {
+  border: 1px solid #ccc;
+  border-radius: 20px;
+}
+
+.form-control:focus {
+  border-color: #c95a35;
+  box-shadow: none;
+}
+
+.btn-gradient {
+  background: linear-gradient(to left, #3f4f7c, #ca635a);
+  color: #fff;
+  width: 100%;
+  border: none;
+  border-radius: 20px;
+  padding: 10px;
+  font-weight: 500;
+}
+
+.login-link {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 14px;
+}
+
+.login-link a {
+  color: #ca635a;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}
+
+/* Optional decorative ticket */
+.ticket {
+  position: absolute;
+  top: -15px;
+  left: -25px;
+  transform: rotate(-15deg);
+  width: 60px;
+}

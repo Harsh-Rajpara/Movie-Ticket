@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+
+  <!----- Bootstrap cdn ----->
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+  <!----- CSS Stylesheet ----->
+
+  <link rel="stylesheet" href="./css/auth.css">
+
+</head>
+
+<body>
+
+  <!----- Login card ----->
+
+  <div class="container d-flex justify-content-center align-items-center">
+    <div class="auth-card">
+      <!-- <img src="ticket.png" alt="ticket" class="ticket-img" /> -->
+      <h3>Login</h3>
+
+      <form id="loginForm" action="#">
+        <div class="mb-3">
+          <input type="email" id="email" class="form-control" placeholder="Email" />
+          <span id="emailerr" class="error-text ps-1"></span>
+        </div>
+
+
+        <div class="mb-3 position-relative">
+          <input type="password" id="password" class="form-control" placeholder="Password" />
+          <span id="passworderr" class="text-danger error-text ps-1" style="font-size: 14px;"></span>
+          <span id="togglePassword" class="position-absolute top-50 end-0 translate-middle-y pe-3 text-muted"
+            style="cursor: pointer;">
+            <i class="bi bi-eye-slash"></i>
+          </span>
+        </div>
+
+        <button type="button" onclick="validation()" class="btn btn-auth">Login</button>
+      </form>
+
+      <p class="auth-text">
+        Create an Account? <a href="./sign_up.html">Sign Up</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- Bootstrap Icons -->
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
+
+  <script>
+    const passwordInput = document.getElementById("password");
+    const togglePassword = document.getElementById("togglePassword");
+    const icon = togglePassword.querySelector("i");
+
+    togglePassword.addEventListener("click", () => {
+      const isPassword = passwordInput.type === "password";
+
+      // Toggle input type
+      passwordInput.type = isPassword ? "text" : "password";
+
+      // Toggle icon (Bootstrap Icons)
+      icon.classList.toggle("bi-eye-slash");
+      icon.classList.toggle("bi-eye");
+
+      // Toggle text-muted color
+      togglePassword.classList.toggle("text-muted");
+      togglePassword.classList.toggle("text-dark");
+    });
+
+    function validation() {
+      let email = document.getElementById("email").value;
+
+      let isValid = true;
+
+      if (email === "") {
+        let emailerr = document.getElementById("emailerr");
+        emailerr.innerHTML = "Email is required";
+        emailerr.style.color = "red";
+        isValid = false;
+      }
+      else {
+        let regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (!regex.test(email)) {
+          let emailerr = document.getElementById("emailerr");
+          emailerr.innerHTML = "Email is not valid";
+          emailerr.style.color = "red";
+          isValid = false;
+        }
+      }
+
+      let password = document.getElementById("password").value;
+      if (password === "") {
+        let passworderr = document.getElementById("passworderr");
+        passworderr.innerHTML = "Password is required";
+        passworderr.style.color = "red";
+        isValid = false;
+      }
+      else {
+
+        if (password.length < 6) {
+          passworderr.innerHTML = "Minimun char is 6";
+          passworderr.style.color = "red";
+          isValid = false;
+        }
+        else if (password.length > 10) {
+          passworderr.innerHTML = "Maximun char is 10";
+          passworderr.style.color = "red";
+          isValid = false;
+        }
+        else if (!/(?=.*[A-Z])/.test(password)) {
+          passworderr.innerHTML = "Ateast one uppercase letter";
+          passworderr.style.color = "red";
+          isValid = false;
+        }
+        else if (!/(?=.*[a-z])/.test(password)) {
+          passworderr.innerHTML = "Ateast one lowercase letter";
+          passworderr.style.color = "red";
+          isValid = false;
+        }
+        else if (!/(?=.*\d)/.test(password)) {
+          passworderr.innerHTML = "At least one digit";
+          passworderr.style.color = "red";
+          isValid = false;
+        }
+        else if (!/(?=.*[@$!%*?&])/.test(password)) {
+          passworderr.innerHTML = "Ateast one special";
+          passworderr.style.color = "red";
+          isValid = false;
+        }
+      }
+
+
+      if (isValid) {
+        let emailInput = document.getElementById("email").value.trim();
+        let passInput = document.getElementById("password").value.trim();
+
+
+        // Admin Login
+        if (emailInput === "Admin@gmail.com" && passInput === "Admin@123") {
+          window.location.href = "../admin/add_cinema.html";   //Go to admin page
+          return;
+        }
+      }
+
+      // Get stored user from localStorage
+      let storedUser = JSON.parse(localStorage.getItem("user"));
+
+      if (!storedUser) {
+        emailerr.innerHTML = "No account found. Please Sign Up!";
+        return;
+      }
+
+      // Check email
+      if (emailInput !== storedUser.email) {
+        emailerr.innerHTML = "Email not found";
+        return;
+      }
+
+      // Check password
+      if (passInput !== storedUser.password) {
+        passworderr.innerHTML = "Incorrect password";
+        return;
+      }
+
+      // Success login
+      alert("Login Successful!");
+      localStorage.setItem("loggedInUser", storedUser.name);
+      window.location.href = "../user/user_home.html";
+    }
+
+  </script>
+
+</body>
+
+</html>
